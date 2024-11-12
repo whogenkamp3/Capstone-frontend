@@ -20,8 +20,7 @@ const Header = () => {
       <div className="header-right">
         <div className="user-dropdown">
           <img
-            src="/public/user.jpg" // Replace with a user icon path
-            alt="User Icon"
+            src="/user.jpg" // Replace with your actual image path in the public folder
             className="user-icon"
           />
           <div className="dropdown-content">
