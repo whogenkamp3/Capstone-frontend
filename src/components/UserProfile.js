@@ -8,18 +8,18 @@ const UserProfile = () => {
 
   useEffect(() => {
     const fetchUserData = async () => {
+      const userId = localStorage.getItem('user_id');
+      
+      if (!userId) {
+        setError('User ID is missing.');
+        setLoading(false);
+        return;
+      }
+
       try {
-        const userId = localStorage.getItem('user_id'); // Assume user_id is stored in localStorage
-
-        if (!userId) {
-          setError('User ID is not available.');
-          setLoading(false);
-          return;
-        }
-
         const response = await axios.get(`http://localhost:8000/api/loginview/?user_id=${userId}`);
         setUserData(response.data);
-      } catch (error) {
+      } catch (err) {
         setError('Failed to load user data.');
       } finally {
         setLoading(false);
@@ -47,3 +47,4 @@ const UserProfile = () => {
 };
 
 export default UserProfile;
+
