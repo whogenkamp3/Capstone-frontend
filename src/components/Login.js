@@ -1,70 +1,53 @@
+// Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
-const Login = ({ setIsAuthenticated }) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Initialize useNavigate
+  const [error, setError] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    setError('');
-
     try {
-      // Make the login request
+      // Replace with your actual login API endpoint
       const response = await axios.post('http://localhost:8000/api/login/', {
         username,
         password,
       });
-      console.log("User authenticated, navigating to home");
-      // Check if login is successful
-      if (response.status === 200) {
-        // Store user ID in localStorage
-        localStorage.setItem('user_id', response.data.username);
-        // Update the authenticated state in App
-        console.log("User authenticated, navigating to home");
 
-        setIsAuthenticated(true);
-        // Navigate to the home page
-        navigate('/home'); // This ensures the user is redirected to the home page
-      }
+      // Assuming response.data contains user data including user_id
+      const user_id = response.data.user_id;
+      localStorage.setItem('user_id', user_id);
+
+      // Redirect to home page
+      navigate('/home');
     } catch (err) {
-      setError('Invalid username or password');
+      setError('Login failed. Please check your credentials.');
     }
   };
 
   return (
     <div className="login-container">
       <h2>Login</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p className="error-message">{error}</p>}
+      <form onSubmit={handleLogin}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+        </label>
+        <br />
         <button type="submit">Login</button>
       </form>
+      {error && <div>{error}</div>}
     </div>
   );
 };
 
 export default Login;
-
