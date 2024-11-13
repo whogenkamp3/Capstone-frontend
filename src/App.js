@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App.css';  // This file will still be used
 import Header from './components/Header';
-import UserProfile from './components/UserProfile';
+import Home from './components/Home';
 
 function App() {
   return (
@@ -11,19 +11,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/user-profile" element={<UserProfile />} />
         </Routes>
       </div>
     </Router>
   );
 }
-
-const Home = () => {
-  return (
-    <div>
-      <h2>Welcome to Test Now</h2>
-    </div>
-  );
-};
 
 export default App;
