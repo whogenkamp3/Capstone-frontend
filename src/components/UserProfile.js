@@ -17,7 +17,7 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/api/loginview/?user_id=${userId}`);
+        const response = await axios.get(`http://localhost:8000/api/user/${userId}/`);
         setUserData(response.data);
       } catch (err) {
         setError('Failed to load user data.');
@@ -30,21 +30,25 @@ const UserProfile = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div className="loading">Loading...</div>;
   }
 
   if (error) {
-    return <div>{error}</div>;
+    return <div className="error">{error}</div>;
   }
 
   return (
-    <div className="user-profile">
-      <h2>User Profile</h2>
-      <p><strong>Name:</strong> {userData.name}</p>
-      <p><strong>Email:</strong> {userData.email}</p>
+    <div className="user-profile-container">
+      <div className="user-profile-header">
+        <h2>User Profile</h2>
+      </div>
+      <div className="user-profile-content">
+        <p><strong>First Name:</strong> {userData.first_name}</p>
+        <p><strong>Last Name:</strong> {userData.last_name}</p>
+        <p><strong>Email:</strong> {userData.email}</p>
+      </div>
     </div>
   );
 };
 
 export default UserProfile;
-
