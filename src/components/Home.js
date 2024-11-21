@@ -50,7 +50,7 @@ const Home = () => {
           <div className="square right-square">
             <div className="top-row">
               <div className="small-square">Groups</div>
-              <div className="small-square">Progress</div>
+              <div className="small-square">Upload</div>
               <div className="small-square">AI Writing</div>
             </div>
             <div className="bottom-row">
