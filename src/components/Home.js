@@ -6,7 +6,6 @@ const Home = () => {
   const [isDropdownVisible, setDropdownVisible] = useState(false);
 
   const handleClassSelection = (className) => {
-    // Add the new class to the array of selected classes
     setSelectedClasses((prevClasses) => [...prevClasses, className]);
     setDropdownVisible(false); // Close dropdown after selection
   };

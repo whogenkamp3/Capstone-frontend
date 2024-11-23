@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
@@ -12,15 +11,20 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      // Replace with your actual login API endpoint
       const response = await axios.post('http://localhost:8000/api/login/', {
         username,
         password,
       });
 
       // Assuming response.data contains user data including user_id
-      const user_id = response.data.user_id;
+      const user_id = response.data.id;
       localStorage.setItem('user_id', user_id);
+
+      const { access, refresh } = response.data;
+
+      // Store the tokens in localStorage
+      localStorage.setItem('access_token', access);
+      localStorage.setItem('refresh_token', refresh);
 
       // Redirect to home page
       navigate('/home');

@@ -9,7 +9,12 @@ const Header = () => {
   };
 
   const handleLogout = () => {
+    // Remove tokens and user ID from localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
     localStorage.removeItem('user_id');
+
+    // Redirect to login page
     navigate('/login');
   };
 

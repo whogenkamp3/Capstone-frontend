@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -17,7 +17,7 @@ const UserProfile = () => {
       }
 
       try {
-        const response = await axios.get(`http://localhost:8000/api/user/${userId}/`);
+        const response = await api.get(`/user/${userId}/`);
         setUserData(response.data);
       } catch (err) {
         setError('Failed to load user data.');
