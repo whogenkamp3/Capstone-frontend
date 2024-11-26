@@ -6,6 +6,7 @@ const Home = () => {
     const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
     const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [geminiPrompt, setGeminiPrompt] = useState(''); // Store the input for the Gemini prompt
+    const [submittedPrompt, setSubmittedPrompt] = useState(''); // Store the prompt to submit
 
     const handleClassSelection = (className) => {
         setSelectedClasses((prevClasses) => [...prevClasses, className]);
@@ -14,6 +15,14 @@ const Home = () => {
 
     const toggleDropdown = () => {
         setDropdownVisible(!isDropdownVisible); // Toggle dropdown visibility
+    };
+
+    const handleGeminiSubmit = () => {
+        if (geminiPrompt.trim() === '') {
+            alert('Please enter a prompt.');
+            return;
+        }
+        setSubmittedPrompt(geminiPrompt); // Send the prompt to GeminiComponent
     };
 
     return (
@@ -69,8 +78,10 @@ const Home = () => {
                             />
                             <div className="gemini-logo"></div>
                         </div>
-                        {/* Include GeminiComponent and pass the prompt */}
-                        <GeminiComponent prompt={geminiPrompt} />
+                        <button onClick={handleGeminiSubmit}>Ask Gemini</button>
+
+                        {/* Only render GeminiComponent if the prompt is submitted */}
+                        {submittedPrompt && <GeminiComponent prompt={submittedPrompt} />}
                     </div>
                 </div>
                 {/* End of main content */}
