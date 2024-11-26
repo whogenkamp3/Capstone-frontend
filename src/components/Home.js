@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from './Header';
 
 const Home = () => {
   const [selectedClasses, setSelectedClasses] = useState([]);  // Store selected classes as an array

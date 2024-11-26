@@ -11,7 +11,7 @@ const Login = () => {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await api.post('/login/', {
+      const response = await axios.post('http://localhost:8000/api/login/', {
         username,
         password,
       });
@@ -43,33 +43,19 @@ const Login = () => {
       <form onSubmit={handleLogin}>
         <label>
           Username:
-          <input 
-            type="text" 
-            value={username} 
-            onChange={(e) => setUsername(e.target.value)} 
-          />
+          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
         </label>
         <br />
         <label>
           Password:
-          <input 
-            type="password" 
-            value={password} 
-            onChange={(e) => setPassword(e.target.value)} 
-          />
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </label>
         <br />
         <button type="submit">Login</button>
       </form>
       {error && <div>{error}</div>}
-
-      {/* Register Button */}
-      <div>
-        <button onClick={handleRegisterRedirect} className="register-button">Register</button>
-      </div>
     </div>
   );
 };
 
 export default Login;
-

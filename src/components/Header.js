@@ -1,11 +1,27 @@
 import React from 'react';
-import Logo from './Logo';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
+
+  const handleProfileClick = () => {
+    navigate('/user-profile');
+  };
+
+  const handleLogout = () => {
+    // Remove tokens and user ID from localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('refresh_token');
+    localStorage.removeItem('user_id');
+
+    // Redirect to login page
+    navigate('/login');
+  };
+
   return (
     <header className="App-header">
       <div className="header-left">
-        <Logo />
+        <img src="/logo.jpeg" alt="Logo" className="logo" />
         <h1 className="app-title">Test Now</h1>
       </div>
 
@@ -20,13 +36,13 @@ const Header = () => {
       <div className="header-right">
         <div className="user-dropdown">
           <img
-            src="/user.jpg" // Replace with your actual image path in the public folder
+            src="/user.jpg" // Replace with a user icon path
+            alt="User Icon"
             className="user-icon"
           />
           <div className="dropdown-content">
-            <a href="#">User Settings</a>
-            <a href="#">User Profile</a>
-            <a href="#">Log Out</a>
+            <button onClick={handleProfileClick}>User Profile</button>
+            <button onClick={handleLogout}>Log Out</button>
           </div>
         </div>
       </div>
@@ -35,3 +51,4 @@ const Header = () => {
 };
 
 export default Header;
+
