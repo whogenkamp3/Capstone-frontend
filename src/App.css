@@ -329,5 +329,111 @@ body {
   cursor: pointer;
 }
 
+.login-container {
+  background-color: #1f3b60; /* Dark blue to match the theme */
+  color: #ffffff; /* White text for contrast */
+  width: 350px;
+  padding: 20px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+  outline: none;
+  border: 1px solid #808080; /* Light gray to match other elements */
+}
+
+.login-container button[type="submit"] {
+  background-color: #bcbcbc; /* Gray color to match the buttons in the screenshot */
+  color: #000000; /* Black text for contrast */
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button[type="submit"]:hover {
+  background-color: #a9a9a9; /* Slightly darker gray for hover effect */
+}
+
+.login-container div {
+  color: #ff4d4f; /* Error color for better visibility */
+  margin-top: 10px;
+  text-align: center;
+}
+
+.user-profile-container {
+  background-color: #1f3b60; /* Dark blue to match theme */
+  color: #ffffff; /* White text for better contrast */
+  width: 400px;
+  padding: 20px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-profile-header h2 {
+  font-size: 24px; /* Similar size to other headers */
+  color: #ffffff; /* Ensure consistent white text */
+}
+
+.user-profile-content {
+  font-size: 16px;
+}
+
+.user-profile-content p {
+  margin-bottom: 10px;
+}
+
+.user-profile-content strong {
+  color: #bcbcbc; /* Light gray for emphasis */
+}
+
+.edit-profile-button {
+  background-color: #bcbcbc; /* Gray to match buttons in other sections */
+  color: #000000; /* Black text for contrast */
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.edit-profile-button:hover {
+  background-color: #a9a9a9; /* Slightly darker gray for hover effect */
+}
+
 
 
