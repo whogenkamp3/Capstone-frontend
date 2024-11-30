@@ -12,11 +12,15 @@ const GeminiComponent = ({ prompt }) => {
         }
         try {
             const response = await api.post('gemini/', { prompt }); // Pass the prompt in the POST body
-            setGeminiResponse(response.data); // Assuming response contains the response object
+            if (response.data.response) {
+                setGeminiResponse(response.data.response); // Extract the `response` key from API
+            } else {
+                setGeminiResponse(response.data); // Fallback if response is structured differently
+            }
             setError(null); // Clear any previous errors
         } catch (err) {
-            console.error("Error fetching Gemini response:", err);
-            setError(err.response?.data?.error || "An unexpected error occurred.");
+            console.error('Error fetching Gemini response:', err);
+            setError(err.response?.data?.error || 'An unexpected error occurred.');
         }
     };
 
@@ -29,27 +33,31 @@ const GeminiComponent = ({ prompt }) => {
     }, [prompt]);
 
     const renderResponse = () => {
-        if (geminiResponse) {
-            // Assuming geminiResponse.candidates is an array, loop over it
-            if (geminiResponse.candidates && Array.isArray(geminiResponse.candidates)) {
-                return geminiResponse.candidates.map((candidate, index) => (
-                    <div key={index}>
-                        <p>{candidate.text || candidate}</p> {/* Adjust based on your data structure */}
-                    </div>
-                ));
-            } else {
-                return <p>{geminiResponse.text || 'No candidates available'}</p>; // Fallback
-            }
+        if (!geminiResponse) {
+            return <p>Loading...</p>; // Show loading message while waiting for response
         }
-        return <p>Loading...</p>;
+
+        // Handle response based on structure
+        if (geminiResponse.candidates && Array.isArray(geminiResponse.candidates)) {
+            return geminiResponse.candidates.map((candidate, index) => {
+                const text = candidate.content?.parts?.[0]?.text; // Safely access the deeply nested text
+                return (
+                    <div key={index}>
+                        <p>{text || 'No text available'}</p> {/* Display the text or fallback */}
+                    </div>
+                );
+            });
+        } else {
+            return <p>No candidates available</p>; // Fallback for unexpected structures
+        }
     };
 
     return (
         <div className="gemini-response">
             {error ? (
-                <p style={{ color: 'red' }}>Error: {error}</p>
+                <p style={{ color: 'red' }}>Error: {error}</p> // Show error messages
             ) : (
-                renderResponse() // This will render the response or the loading state
+                renderResponse() // Render the response or loading state
             )}
         </div>
     );
