@@ -39,6 +39,10 @@ const Home = () => {
         <div className="home-container">
             {/* Include Header here */}
             <Header />
+    return (
+        <div className="home-container">
+            {/* Include Header here */}
+            <Header />
 
             <div className="home-content">
                 <div className="container">
@@ -57,7 +61,26 @@ const Home = () => {
                                 <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
                             </div>
                         )}
+                        {/* Dropdown menu for class selection */}
+                        {isDropdownVisible && (
+                            <div className="dropdown">
+                                <button onClick={() => handleClassSelection("Math")}>Math</button>
+                                <button onClick={() => handleClassSelection("English")}>English</button>
+                                <button onClick={() => handleClassSelection("Science")}>Science</button>
+                                <button onClick={() => handleClassSelection("History")}>History</button>
+                                <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
+                            </div>
+                        )}
 
+                        {/* Render all selected classes */}
+                        <div className="class-squares-container">
+                            {selectedClasses.map((className, index) => (
+                                <div key={index} className="small-square">
+                                    {className}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                         {/* Render all selected classes */}
                         <div className="class-squares-container">
                             {selectedClasses.map((className, index) => (
