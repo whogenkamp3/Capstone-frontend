@@ -5,8 +5,16 @@ body {
   display: flex;
   flex-direction: column;
   min-height: 100vh; /* Ensures the body takes the full height of the viewport */
-  background-color: #bcbcbc;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  flex: 1; /* Ensures this takes up the remaining space in the viewport */
+}
+
+/* Main Header Container */
 .App-header {
   background-color: #1f3b60; /* Dark blue background to match other sections */
   padding: 15px;
@@ -24,14 +32,15 @@ body {
 }
 
 .logo {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
+  height: 80px;
+  margin-right: 10px;
 }
 
 .app-title {
-  font-size: 24px;
-  color: #ffffff; /* White text for better contrast */
+  font-size: 3rem;
+  font-family: "Titillium Web", sans-serif;
+  font-weight: 200;
+  font-style: normal;
 }
 
 /* Header middle - Search bar */
@@ -426,6 +435,422 @@ body {
 .edit-profile-button:hover {
   background-color: #a9a9a9; /* Slightly darker gray for hover effect */
 }
+
+
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex: 1; /* Ensures this container takes up remaining space in the viewport */
+  padding: 10px;  /* Padding to ensure squares don't touch the edges */
+  margin-top: 60px; /* Pushes the container down after header */
+}
+
+.square {
+  width: 48%; /* Each square takes up almost half the screen */
+  height: 650px; /* Fixed height for the squares (screen height minus header) */
+  background-color: #1e3a5f; /* Light navy color */
+  border-radius: 15px; /* Rounded corners */
+  transition: transform 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.square:hover {
+  transform: scale(1.05); /* Slightly grow when hovered */
+}
+
+.container > .square:first-child {
+  margin-right: 4%; /* Small space between the two squares */
+}
+
+/* New styling for the "Class" text in the left square */
+.left-square {
+  position: relative; /* Needed for positioning the "Class" text */
+}
+
+.class-text {
+  font-family: 'Titillium Web', sans-serif; /* Ensure the Google font is used */
+  font-size: 3rem; /* Large size for the "Class" text */
+  font-weight: 200;
+  color: white; /* White text color */
+  position: absolute; /* Position it in the top-left corner */
+  top: 20px; /* Adjust top positioning */
+  left: 20px; /* Adjust left positioning */
+}
+
+.plus-button {
+  font-size: 2rem; /* Size of the plus sign */
+  background-color: transparent; /* Transparent background */
+  color: white; /* White color for the plus sign */
+  border: 2px solid white; /* White border */
+  border-radius: 50%; /* Circular button */
+  width: 40px; /* Width of the button */
+  height: 40px; /* Height of the button */
+  position: absolute; /* Positioned relative to the parent square */
+  top: 20px; /* Align with the top */
+  left: calc(100% - 60px); /* Position it to the right of the "Class" text */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.plus-button:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Light shade on hover */
+}
+
+/* Dropdown menu for class selection */
+.dropdown {
+  position: absolute;
+  top: 70px; /* Adjust this to position it below the plus button */
+  left: 20px;
+  background-color: #1e3a5f;
+  border-radius: 10px;
+  width: 200px;
+}
+
+
+.dropdown button {
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: none;
+  padding: 10px;
+  text-align: left;
+  cursor: pointer;
+}
+
+.dropdown button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.class-squares-container {
+  display: flex;
+  flex-wrap: wrap; /* Allow the squares to wrap to a new line */
+  gap: 10px; /* Space between squares */
+  margin-top: 120px; /* Increased space from the top */
+  padding-left: 20px; /* Padding to the left to keep it aligned */
+}
+
+.small-square {
+  width: calc(33.333% - 10px); /* Three squares per row, accounting for the gap */
+  height: 100px; /* Increased height for each square */
+  background-color: #2e4d6c; /* Darker shade for smaller square */
+  margin-bottom: 10px; /* Space below each square */
+  border-radius: 10px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+/* Adjust for small screens, if necessary */
+@media (max-width: 768px) {
+  .small-square {
+    width: 48%; /* 2 squares per row on smaller screens */
+  }
+}
+
+/* Right Square styling (unchanged from before) */
+.right-square {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  height: 630px; /* Same height as the left square */
+}
+
+/* Layout for 3 squares on top and 3 squares on the bottom */
+.right-square .top-row, .right-square .bottom-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* Styling for the 6 small rounded squares inside the right square */
+.right-square .small-square {
+  width: 30%; /* Smaller width to fit three in a row */
+  height: 200px; /* Smaller height */
+  background-color: #d3d3d3; /* Light gray color */
+  border-radius: 15px; /* Rounded corners */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black; /* Text color */
+  font-size: 0.9rem;
+  font-weight: 200;
+  transition: transform 0.3s ease; /* Smooth hover effect */
+}
+
+.right-square .small-square:hover {
+  transform: scale(1.05); /* Grow on hover */
+}
+
+
+.right-square .top-row .small-square {
+  margin-bottom: 30px; /* Space between top and bottom row */
+}
+
+
+.right-square .small-square:nth-child(1) {
+  content: "Groups";
+  font-family: 'Titillium Web', sans-serif; 
+  font-size: 2rem; 
+  font-weight: 200;
+}
+
+.right-square .small-square:nth-child(2) {
+  content: "Progress";
+  font-family: 'Titillium Web', sans-serif; 
+  font-size: 2rem; 
+  font-weight: 200;
+}
+
+.right-square .small-square:nth-child(3) {
+  content: "AI Writing";
+  font-family: 'Titillium Web', sans-serif; 
+  font-size: 2rem; 
+  font-weight: 200;
+}
+
+.right-square .small-square:nth-child(4) {
+  content: "University";
+}
+
+.right-square .small-square:nth-child(5) {
+  content: "Presentations";
+}
+
+.right-square .small-square:nth-child(6) {
+  content: "Progress";
+}
+
+
+.gemini-search-bar {
+  width: 100%;
+  height: 50px; /* Height of the search bar */
+  background-color: #2e4d6c; /* Matching the navy color */
+  border-radius: 25px; /* Rounded corners */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  margin-top: 60px; 
+  box-sizing: border-box;
+}
+
+.gemini-search-bar input {
+  width: 80%;
+  height: 40px;
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  padding-left: 10px; 
+  border-radius: 25px; 
+}
+
+.gemini-search-bar input::placeholder {
+  color: rgba(255, 255, 255, 0.5); 
+}
+
+.gemini-search-bar .gemini-logo {
+  margin-top: 45px;
+  width: 100px;
+  height: 100px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/8/8a/Google_Gemini_logo.svg/2560px-Google_Gemini_logo.svg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin-left: 10px; 
+  cursor: pointer;
+}
+
+.login-container {
+  background-color: #1f3b60; /* Dark blue to match the theme */
+  color: #ffffff; /* White text for contrast */
+  width: 350px;
+  padding: 20px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.login-container label {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+.login-container input[type="text"],
+.login-container input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+.login-container input[type="text"]:focus,
+.login-container input[type="password"]:focus {
+  outline: none;
+  border: 1px solid #808080; /* Light gray to match other elements */
+}
+
+.login-container button {
+  background-color: #bcbcbc; /* Gray color to match the buttons in the screenshot */
+  color: #000000; /* Black text for contrast */
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.login-container button[type="submit"]:hover {
+  background-color: #a9a9a9; /* Slightly darker gray for hover effect */
+}
+
+.login-container div {
+  color: #ff4d4f; /* Error color for better visibility */
+  margin-top: 10px;
+  text-align: center;
+}
+
+.user-profile-container {
+  background-color: #1f3b60; /* Dark blue to match theme */
+  color: #ffffff; /* White text for better contrast */
+  width: 400px;
+  padding: 20px;
+  margin: 50px auto;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.user-profile-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.user-profile-header h2 {
+  font-size: 24px; /* Similar size to other headers */
+  color: #ffffff; /* Ensure consistent white text */
+}
+
+.user-profile-content {
+  font-size: 16px;
+}
+
+.user-profile-content p {
+  margin-bottom: 10px;
+}
+
+.user-profile-content strong {
+  color: #bcbcbc; /* Light gray for emphasis */
+}
+
+.edit-profile-button {
+  background-color: #bcbcbc; /* Gray to match buttons in other sections */
+  color: #000000; /* Black text for contrast */
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.edit-profile-button:hover {
+  background-color: #a9a9a9; /* Slightly darker gray for hover effect */
+}
+/* Floating Button Styles */
+.gemini-button {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  background-color: #1e4d6c;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.gemini-button:hover {
+  background-color: #ff4d4f;
+  transform: scale(1.1);
+}
+
+/* Chat Window Styles */
+.gemini-chat-window {
+  position: fixed;
+  bottom: 100px;
+  right: 30px;
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  z-index: 999;
+}
+
+.chat-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.chat-input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.chat-submit {
+  background-color: #1e4d6c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.chat-submit:hover {
+  background-color: #ff4d4f;
+}
+
+.close-button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: #ff4d4f;
+  cursor: pointer;
+  align-self: flex-end;
+}
+
+.close-button:hover {
+  color: #1e4d6c;
+}
+
+
 
 
 

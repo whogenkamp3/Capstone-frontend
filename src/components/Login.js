@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import axios from 'axios'; // Import axios
 import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
@@ -33,25 +33,40 @@ const Login = () => {
     }
   };
 
+  const handleRegisterRedirect = () => {
+    navigate('/register'); // Redirect to the register page
+  };
+
   return (
     <div className="login-container">
       <h2>Login</h2>
       <form onSubmit={handleLogin}>
         <label>
           Username:
-          <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+          />
         </label>
         <br />
         <label>
           Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          <input
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </label>
         <br />
         <button type="submit">Login</button>
       </form>
-      {error && <div>{error}</div>}
+      {error && <div style={{ color: 'red' }}>{error}</div>}
+      <br />
+      <button onClick={handleRegisterRedirect}>Register</button>
     </div>
   );
 };
 
 export default Login;
+
