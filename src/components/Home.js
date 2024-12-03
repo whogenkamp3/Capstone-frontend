@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Header from './Header';
-import GeminiComponent from './GeminiComponent';  // Import the Gemini component for prompt handling
+import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
 
 const Home = () => {
     // States for class selection, dropdown visibility, and Gemini prompt submission
@@ -37,11 +37,7 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            {/* Include Header here */}
-            <Header />
-    return (
-        <div className="home-container">
-            {/* Include Header here */}
+            {/* Include Header */}
             <Header />
 
             <div className="home-content">
@@ -54,33 +50,14 @@ const Home = () => {
                         {/* Dropdown menu for class selection */}
                         {isDropdownVisible && (
                             <div className="dropdown">
-                                <button onClick={() => handleClassSelection("Math")}>Math</button>
-                                <button onClick={() => handleClassSelection("English")}>English</button>
-                                <button onClick={() => handleClassSelection("Science")}>Science</button>
-                                <button onClick={() => handleClassSelection("History")}>History</button>
-                                <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
-                            </div>
-                        )}
-                        {/* Dropdown menu for class selection */}
-                        {isDropdownVisible && (
-                            <div className="dropdown">
-                                <button onClick={() => handleClassSelection("Math")}>Math</button>
-                                <button onClick={() => handleClassSelection("English")}>English</button>
-                                <button onClick={() => handleClassSelection("Science")}>Science</button>
-                                <button onClick={() => handleClassSelection("History")}>History</button>
-                                <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
+                                {["Math", "English", "Science", "History", "Foreign Language"].map((subject) => (
+                                    <button key={subject} onClick={() => handleClassSelection(subject)}>
+                                        {subject}
+                                    </button>
+                                ))}
                             </div>
                         )}
 
-                        {/* Render all selected classes */}
-                        <div className="class-squares-container">
-                            {selectedClasses.map((className, index) => (
-                                <div key={index} className="small-square">
-                                    {className}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
                         {/* Render all selected classes */}
                         <div className="class-squares-container">
                             {selectedClasses.map((className, index) => (
