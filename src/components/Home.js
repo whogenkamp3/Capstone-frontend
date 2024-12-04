@@ -71,7 +71,9 @@ const Home = () => {
                     {/* Right side content with additional information */}
                     <div className="square right-square">
                         <div className="top-row">
-                            <div className="small-square">Groups</div>
+                            <div className="small-square">
+                              <Link to="/groups">Groups</Link>
+                            </div>
                             <div className="small-square">Upload</div>
                             <div className="small-square">AI Writing</div>
                         </div>
