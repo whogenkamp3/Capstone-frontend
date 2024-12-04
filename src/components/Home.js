@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Header from './Header';
 import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     // States for class selection, dropdown visibility, and Gemini prompt submission

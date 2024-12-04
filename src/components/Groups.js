@@ -1,68 +1,105 @@
-import React, { useState } from 'react';
-import api from './api';
+import React, { useState, useEffect } from 'react';
+import Header from './Header';
+import api from '../api';
 
 const Groups = () => {
   const [groupName, setGroupName] = useState('');
-  const [groupId, setGroupId] = useState(null);
-  const [userId, setUserId] = useState('');
+  const [groupId, setGroupId] = useState('');
+  const [userGroups, setUserGroups] = useState([]);
+  const [newMemberUserId, setNewMemberUserId] = useState(''); // State for new member user ID
   const [message, setMessage] = useState('');
 
-  const createGroup = async () => {
+  const userId = localStorage.getItem('user_id'); // Get user_id from localStorage
+
+  // Fetch user groups when the component is mounted
+  useEffect(() => {
+    fetchUserGroups();
+  }, []);
+
+  const fetchUserGroups = async () => {
+    if (!userId) {
+      setMessage("User ID is missing.");
+      console.log('User ID is missing.');
+      return;
+    }
+
     try {
-      const response = await api.post('groups/', { group_name: groupName });
+      const response = await api.get('user-groups/', {
+        params: { user_id: userId },
+      });
+
+      setUserGroups(response.data);
+      setMessage('');
+    } catch (error) {
+      setMessage(`Error fetching user groups: ${JSON.stringify(error.response?.data || error.message)}`);
+    }
+  };
+
+  const createGroup = async () => {
+    if (!userId || !groupName) {
+      setMessage("User ID or Group Name is missing.");
+      console.log('User ID or Group Name is missing.');
+      return;
+    }
+
+    try {
+      console.log('User ID:', userId);
+      console.log('Group Name:', groupName);
+
+      // Send both group_name and members (user_id as a string) to the backend
+      const response = await api.post('create-group/', {
+        group_name: groupName,
+        members: userId,  // Send user_id as a plain string
+      });
+
       setMessage(`Group created successfully with ID: ${response.data.group_id}`);
       setGroupId(response.data.group_id);
+      fetchUserGroups(); // Refresh the list of groups after creating a new one
     } catch (error) {
-      setMessage(`Error creating group: ${error.response?.data || error.message}`);
+      setMessage(`Error creating group: ${JSON.stringify(error.response?.data || error.message)}`);
     }
   };
 
   const addGroupMember = async () => {
-    try {
-      const response = await api.post(`groups/${groupId}/add-member/`, null, {
-        params: { user_id: userId },
-      });
-      setMessage(response.data.message);
-    } catch (error) {
-      setMessage(`Error adding member: ${error.response?.data || error.message}`);
+    if (!groupId || !newMemberUserId) {
+      setMessage("Please provide a valid Group ID and New Member User ID.");
+      console.log("Group ID or New Member User ID is missing.");
+      return;
     }
-  };
 
-  const removeGroupMember = async () => {
     try {
-      const response = await api.post(`groups/${groupId}/remove-member/`, null, {
-        params: { user_id: userId },
+      // Make the POST request to add the new user to the group, passing group_id in the URL
+      // and new member user_id as a query parameter
+      const response = await api.post(`add-group-member/${groupId}/`, null, {
+        params: { user_id: newMemberUserId },
       });
-      setMessage(response.data.message);
-    } catch (error) {
-      setMessage(`Error removing member: ${error.response?.data || error.message}`);
-    }
-  };
 
-  const changeGroupName = async (newGroupName) => {
-    try {
-      const response = await api.post(`groups/${groupId}/change-name/`, {
-        group_name: newGroupName,
-      });
       setMessage(response.data.message);
+      fetchUserGroups(); // Refresh the list of groups after adding a member
     } catch (error) {
-      setMessage(`Error changing group name: ${error.response?.data || error.message}`);
-    }
-  };
-
-  const deleteGroup = async () => {
-    try {
-      const response = await api.delete(`groups/${groupId}/`);
-      setMessage(response.data.message);
-      setGroupId(null);
-    } catch (error) {
-      setMessage(`Error deleting group: ${error.response?.data || error.message}`);
+      setMessage(`Error adding member: ${JSON.stringify(error.response?.data || error.message)}`);
     }
   };
 
   return (
     <div>
+      <Header /> {/* Include the header to maintain consistency */}
       <h1>Group Management</h1>
+
+      <div>
+        <h2>Your Groups</h2>
+        {userGroups.length === 0 ? (
+          <p>No groups available.</p>
+        ) : (
+          <ul>
+            {userGroups.map((group) => (
+              <li key={group.group_id}>
+                {group.group_name} (ID: {group.group_id})
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
 
       <div>
         <h2>Create Group</h2>
@@ -78,23 +115,18 @@ const Groups = () => {
       <div>
         <h2>Manage Group</h2>
         <input
-          type="number"
+          type="text"
           placeholder="Group ID"
-          value={groupId || ''}
+          value={groupId}
           onChange={(e) => setGroupId(e.target.value)}
         />
         <input
           type="text"
-          placeholder="User ID"
-          value={userId}
-          onChange={(e) => setUserId(e.target.value)}
+          placeholder="New Member User ID"
+          value={newMemberUserId}
+          onChange={(e) => setNewMemberUserId(e.target.value)}
         />
         <button onClick={addGroupMember}>Add Member</button>
-        <button onClick={removeGroupMember}>Remove Member</button>
-        <button onClick={() => changeGroupName(prompt('Enter new group name:'))}>
-          Change Group Name
-        </button>
-        <button onClick={deleteGroup}>Delete Group</button>
       </div>
 
       {message && <p>{message}</p>}
@@ -103,3 +135,11 @@ const Groups = () => {
 };
 
 export default Groups;
+
+
+
+
+
+
+
+
