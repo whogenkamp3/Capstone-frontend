@@ -4,6 +4,7 @@ import Login from './components/Login';
 import UserProfile from './components/UserProfile';
 import Register from './components/Register';  // Import the Register component
 import ProtectedRoute from './components/ProtectedRoute';
+import ClassCreation from './components/ClassCreation';
 
 
 // Create a router with all the routes defined
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
    path: '/user-profile',
    element: <ProtectedRoute element={<UserProfile />} />, // User Profile Page (protected)
  },
+ {
+  path: '/classcreation',
+  element: <ProtectedRoute element={<ClassCreation />} />,
+ },
+ 
 ]);
 
 

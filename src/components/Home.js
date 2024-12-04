@@ -1,25 +1,15 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import Header from './Header';
-import GeminiComponent from './GeminiComponent';  // Import the Gemini component for prompt handling
+import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
 
 const Home = () => {
-    // States for class selection, dropdown visibility, and Gemini prompt submission
     const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false); // State to track chat window visibility
     const [geminiPrompt, setGeminiPrompt] = useState(''); // Store the input for the Gemini prompt
     const [submittedPrompt, setSubmittedPrompt] = useState(''); // Store the prompt to submit
 
-    // Handle selection of class
-    const handleClassSelection = (className) => {
-        setSelectedClasses((prevClasses) => [...prevClasses, className]);
-        setDropdownVisible(false); // Close dropdown after selection
-    };
-
-    // Toggle dropdown visibility
-    const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
-    };
+    const navigate = useNavigate(); // Initialize useNavigate for redirection
 
     // Toggle chat window visibility
     const toggleChat = () => {
@@ -35,13 +25,14 @@ const Home = () => {
         setSubmittedPrompt(geminiPrompt); // Send the prompt to GeminiComponent
     };
 
+    // Redirect to ClassCreation.js when the plus button is clicked
+    const redirectToClassCreation = () => {
+        navigate('/classcreation');
+    };
+
     return (
         <div className="home-container">
-            {/* Include Header here */}
-            <Header />
-    return (
-        <div className="home-container">
-            {/* Include Header here */}
+            {/* Include Header */}
             <Header />
 
             <div className="home-content">
@@ -49,38 +40,8 @@ const Home = () => {
                     {/* Left side content with class selection */}
                     <div className="square left-square">
                         <div className="class-text">Class</div>
-                        <button className="plus-button" onClick={toggleDropdown}>+</button>
+                        <button className="plus-button" onClick={redirectToClassCreation}>+</button>
 
-                        {/* Dropdown menu for class selection */}
-                        {isDropdownVisible && (
-                            <div className="dropdown">
-                                <button onClick={() => handleClassSelection("Math")}>Math</button>
-                                <button onClick={() => handleClassSelection("English")}>English</button>
-                                <button onClick={() => handleClassSelection("Science")}>Science</button>
-                                <button onClick={() => handleClassSelection("History")}>History</button>
-                                <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
-                            </div>
-                        )}
-                        {/* Dropdown menu for class selection */}
-                        {isDropdownVisible && (
-                            <div className="dropdown">
-                                <button onClick={() => handleClassSelection("Math")}>Math</button>
-                                <button onClick={() => handleClassSelection("English")}>English</button>
-                                <button onClick={() => handleClassSelection("Science")}>Science</button>
-                                <button onClick={() => handleClassSelection("History")}>History</button>
-                                <button onClick={() => handleClassSelection("Foreign Language")}>Foreign Language</button>
-                            </div>
-                        )}
-
-                        {/* Render all selected classes */}
-                        <div className="class-squares-container">
-                            {selectedClasses.map((className, index) => (
-                                <div key={index} className="small-square">
-                                    {className}
-                                </div>
-                            ))}
-                        </div>
-                    </div>
                         {/* Render all selected classes */}
                         <div className="class-squares-container">
                             {selectedClasses.map((className, index) => (
@@ -141,5 +102,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
 
 

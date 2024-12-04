@@ -33,8 +33,12 @@ body {
 
 .logo {
   height: 80px;
+  width: 80px; /* Set width to match height */
   margin-right: 10px;
+  border-radius: 50%; /* Makes the logo a circle */
+  object-fit: cover; /* Ensures the logo fits within the circle without distortion */
 }
+
 
 .app-title {
   font-size: 3rem;
@@ -388,38 +392,6 @@ body {
   text-align: center;
 }
 
-.user-profile-container {
-  background-color: #1f3b60; /* Dark blue to match theme */
-  color: #ffffff; /* White text for better contrast */
-  width: 400px;
-  padding: 20px;
-  margin: 50px auto;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.user-profile-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
-
-.user-profile-header h2 {
-  font-size: 24px; /* Similar size to other headers */
-  color: #ffffff; /* Ensure consistent white text */
-}
-
-.user-profile-content {
-  font-size: 16px;
-}
-
-.user-profile-content p {
-  margin-bottom: 10px;
-}
-
-.user-profile-content strong {
-  color: #bcbcbc; /* Light gray for emphasis */
-}
-
 .edit-profile-button {
   background-color: #bcbcbc; /* Gray to match buttons in other sections */
   color: #000000; /* Black text for contrast */
@@ -720,37 +692,11 @@ body {
   text-align: center;
 }
 
-.user-profile-container {
-  background-color: #1f3b60; /* Dark blue to match theme */
-  color: #ffffff; /* White text for better contrast */
-  width: 400px;
-  padding: 20px;
-  margin: 50px auto;
-  border-radius: 10px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
-}
 
-.user-profile-header {
-  text-align: center;
-  margin-bottom: 20px;
-}
 
-.user-profile-header h2 {
-  font-size: 24px; /* Similar size to other headers */
-  color: #ffffff; /* Ensure consistent white text */
-}
 
-.user-profile-content {
-  font-size: 16px;
-}
 
-.user-profile-content p {
-  margin-bottom: 10px;
-}
 
-.user-profile-content strong {
-  color: #bcbcbc; /* Light gray for emphasis */
-}
 
 .edit-profile-button {
   background-color: #bcbcbc; /* Gray to match buttons in other sections */
