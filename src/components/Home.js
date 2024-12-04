@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import Header from './Header';
 import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
-import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
 
 const Home = () => {
     const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
@@ -33,7 +32,6 @@ const Home = () => {
 
     return (
         <div className="home-container">
-            {/* Include Header */}
             {/* Include Header */}
             <Header />
 
@@ -104,6 +102,7 @@ const Home = () => {
 };
 
 export default Home;
+
 
 
 
