@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import api from '../api';
+import Header from './Header'; // Adjusted the import path
+import './UserProfile.css';
+
+
 
 const UserProfile = () => {
   const [userData, setUserData] = useState(null);
@@ -39,6 +43,7 @@ const UserProfile = () => {
 
   return (
     <div className="user-profile-container">
+      <Header /> {/* This is how the Header component is used */}
       <div className="user-profile-header">
         <h2>User Profile</h2>
       </div>

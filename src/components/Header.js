@@ -5,7 +5,7 @@ const Header = () => {
   const navigate = useNavigate();
 
   const handleProfileClick = () => {
-    navigate('/user-profile');
+    navigate('/user-profile'); // Navigate to the user profile page
   };
 
   const handleLogout = () => {
@@ -18,11 +18,22 @@ const Header = () => {
     navigate('/login');
   };
 
+  const handleLogoClick = () => {
+    // Navigate to home page when the logo is clicked
+    navigate('/home');
+  };
+
   return (
     <header className="App-header">
       <div className="header-left">
-        <img src="/logo.jpeg" alt="Logo" className="logo" />
-        <h1 className="app-title">Test Now</h1>
+        {/* Logo now routes to /home */}
+        <img 
+          src="/logo.jpeg" 
+          alt="Logo" 
+          className="logo" 
+          onClick={handleLogoClick} 
+        />
+        <h1 className="app-title">TestNow</h1>
       </div>
 
       <div className="header-middle">
@@ -51,4 +62,5 @@ const Header = () => {
 };
 
 export default Header;
+
 

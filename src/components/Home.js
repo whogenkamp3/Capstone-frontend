@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
 import Header from './Header';
 import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
 import { Link } from 'react-router-dom';
 
 const Home = () => {
-    // States for class selection, dropdown visibility, and Gemini prompt submission
     const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
-    const [isDropdownVisible, setDropdownVisible] = useState(false);
     const [isChatOpen, setIsChatOpen] = useState(false); // State to track chat window visibility
     const [geminiPrompt, setGeminiPrompt] = useState(''); // Store the input for the Gemini prompt
     const [submittedPrompt, setSubmittedPrompt] = useState(''); // Store the prompt to submit
 
-    // Handle selection of class
-    const handleClassSelection = (className) => {
-        setSelectedClasses((prevClasses) => [...prevClasses, className]);
-        setDropdownVisible(false); // Close dropdown after selection
-    };
-
-    // Toggle dropdown visibility
-    const toggleDropdown = () => {
-        setDropdownVisible(!isDropdownVisible);
-    };
+    const navigate = useNavigate(); // Initialize useNavigate for redirection
 
     // Toggle chat window visibility
     const toggleChat = () => {
@@ -36,6 +26,11 @@ const Home = () => {
         setSubmittedPrompt(geminiPrompt); // Send the prompt to GeminiComponent
     };
 
+    // Redirect to ClassCreation.js when the plus button is clicked
+    const redirectToClassCreation = () => {
+        navigate('/classcreation');
+    };
+
     return (
         <div className="home-container">
             {/* Include Header */}
@@ -46,18 +41,7 @@ const Home = () => {
                     {/* Left side content with class selection */}
                     <div className="square left-square">
                         <div className="class-text">Class</div>
-                        <button className="plus-button" onClick={toggleDropdown}>+</button>
-
-                        {/* Dropdown menu for class selection */}
-                        {isDropdownVisible && (
-                            <div className="dropdown">
-                                {["Math", "English", "Science", "History", "Foreign Language"].map((subject) => (
-                                    <button key={subject} onClick={() => handleClassSelection(subject)}>
-                                        {subject}
-                                    </button>
-                                ))}
-                            </div>
-                        )}
+                        <button className="plus-button" onClick={redirectToClassCreation}>+</button>
 
                         {/* Render all selected classes */}
                         <div className="class-squares-container">
@@ -121,5 +105,7 @@ const Home = () => {
 };
 
 export default Home;
+
+
 
 

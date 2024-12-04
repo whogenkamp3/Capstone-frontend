@@ -5,6 +5,7 @@ import UserProfile from './components/UserProfile';
 import Register from './components/Register';  // Import the Register component
 import Groups from './components/Groups'; // Import the Groups component
 import ProtectedRoute from './components/ProtectedRoute';
+import ClassCreation from './components/ClassCreation';
 
 
 
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   path: '/groups',
   element: <ProtectedRoute element={<Groups />} />, // Groups Page (protected)
 },
+{
+  path: '/classcreation',
+  element: <ProtectedRoute element={<ClassCreation />} />,
+ },
 ]);
 
 
