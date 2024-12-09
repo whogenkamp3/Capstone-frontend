@@ -6,7 +6,7 @@ import Register from './components/Register';  // Import the Register component
 import Groups from './components/Groups'; // Import the Groups component
 import ProtectedRoute from './components/ProtectedRoute';
 import ClassCreation from './components/ClassCreation';
-import AIWriting from './components/AIWriting';
+import AIWriting from './components/aiWriting';
 
 
 // Create a router with all the routes defined
