@@ -6,7 +6,7 @@ import Register from './components/Register';  // Import the Register component
 import Groups from './components/Groups'; // Import the Groups component
 import ProtectedRoute from './components/ProtectedRoute';
 import ClassCreation from './components/ClassCreation';
-
+import AIWriting from './components/AIWriting';
 
 
 // Create a router with all the routes defined
@@ -38,6 +38,10 @@ const router = createBrowserRouter([
 {
   path: '/classcreation',
   element: <ProtectedRoute element={<ClassCreation />} />,
+ },
+ {
+  path: '/aiwriting',
+  element: <ProtectedRoute element={<AIWriting />} />,
  },
 ]);
 
