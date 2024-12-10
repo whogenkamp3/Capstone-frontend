@@ -24,11 +24,11 @@ const Groups = () => {
     }
 
     try {
-      const response = await api.get('user-groups/', {
+      const response = await api.get('user/groups/', {
         params: { user_id: userId },
       });
 
-      setUserGroups(response.data);
+      setUserGroups(response.data); // Update state with fetched groups
       setMessage('');
     } catch (error) {
       setMessage(`Error fetching user groups: ${JSON.stringify(error.response?.data || error.message)}`);
@@ -46,14 +46,14 @@ const Groups = () => {
       console.log('User ID:', userId);
       console.log('Group Name:', groupName);
 
-      // Send both group_name and members (user_id as a string) to the backend
+      // Send group_name and members (comma-separated user_id string) to the backend
       const response = await api.post('create-group/', {
         group_name: groupName,
-        members: userId,  // Send user_id as a plain string
+        members: `${userId}`, // Ensure user_id is sent as a string
       });
 
       setMessage(`Group created successfully with ID: ${response.data.group_id}`);
-      setGroupId(response.data.group_id);
+      setGroupId(response.data.group_id); // Set the new group ID
       fetchUserGroups(); // Refresh the list of groups after creating a new one
     } catch (error) {
       setMessage(`Error creating group: ${JSON.stringify(error.response?.data || error.message)}`);
@@ -135,6 +135,7 @@ const Groups = () => {
 };
 
 export default Groups;
+
 
 
 
