@@ -41,11 +41,18 @@ const GeminiComponent = ({ prompt }) => {
         if (geminiResponse.candidates && Array.isArray(geminiResponse.candidates)) {
             return geminiResponse.candidates.map((candidate, index) => {
                 const text = candidate.content?.parts?.[0]?.text; // Safely access the deeply nested text
-                return (
-                    <div key={index}>
-                        <p>{text || 'No text available'}</p> {/* Display the text or fallback */}
-                    </div>
-                );
+                if (text) {
+                    // Split text by newline characters and map each paragraph to a <p> tag
+                    const paragraphs = text.split('\n').filter(paragraph => paragraph.trim() !== '');
+                    return (
+                        <div key={index} className="response-paragraphs">
+                            {paragraphs.map((paragraph, idx) => (
+                                <p key={idx}>{paragraph}</p> // Render each paragraph in its own <p> tag
+                            ))}
+                        </div>
+                    );
+                }
+                return <p key={index}>No text available</p>; // Fallback if no text
             });
         } else {
             return <p>No candidates available</p>; // Fallback for unexpected structures

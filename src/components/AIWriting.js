@@ -5,7 +5,7 @@ import GeminiComponent from './GeminiComponent'; // GeminiComponent for API hand
 
 const AIWriting = () => {
     const [geminiPrompt, setGeminiPrompt] = useState(''); // State for user input
-    const [submittedPrompt, setSubmittedPrompt] = useState(null); // State for submitted input
+    const [submittedPrompt, setSubmittedPrompt, clearResponse] = useState(null); // State for submitted input
     //const navigate = useNavigate(); // To use for navigation
 
     const handleGeminiSubmit = () => {
@@ -14,6 +14,11 @@ const AIWriting = () => {
         } else {
             alert('Please enter a prompt to continue.');
         }
+    };
+
+    const handleClearResponse = () => {
+        setSubmittedPrompt(null); // Clear the submitted prompt
+        setGeminiPrompt(''); // Optionally clear the input field
     };
 
     return (
@@ -34,6 +39,13 @@ const AIWriting = () => {
                     />
                     <button className="chat-submit" onClick={handleGeminiSubmit}>
                         Send
+                    </button>
+                    <button
+                        className="chat-submit"
+                        onClick={handleClearResponse}
+                        style={{ marginLeft: '10px' }}
+                    >
+                        Clear
                     </button>
                 </div>
 
