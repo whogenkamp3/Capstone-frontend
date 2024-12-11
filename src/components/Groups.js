@@ -93,6 +93,7 @@ const Groups = () => {
             {userGroups.map((group) => (
               <li key={group.group_id} className={styles.groupsListItem}>
                 {group.group_name} (ID: {group.group_id})
+                (Members: {group.members})
               </li>
             ))}
           </ul>

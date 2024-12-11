@@ -40,7 +40,10 @@ const ClassCreation = () => {
       setSuccessMessage(`Class "${class_name}" created successfully!`);
       setClassName(''); // Clear the input field
 
-      navigate('/home');
+      
+      setTimeout(() => {
+        navigate('/home');
+      }, 2000); 
 
     } catch (err) {
       console.error('Error creating class:', err);

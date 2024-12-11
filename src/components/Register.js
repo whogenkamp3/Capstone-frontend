@@ -85,7 +85,7 @@ const Register = () => {
 
        // Redirect user to the dashboard after a short delay
        setTimeout(() => {
-         navigate('/home');
+         navigate('/');
        }, 2000);  // Give time for the success message to be displayed
      }
    } catch (err) {

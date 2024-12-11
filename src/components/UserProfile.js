@@ -51,6 +51,7 @@ const UserProfile = () => {
         <p><strong>First Name:</strong> {userData.first_name}</p>
         <p><strong>Last Name:</strong> {userData.last_name}</p>
         <p><strong>Email:</strong> {userData.email}</p>
+        <p><strong>User ID:</strong> {userData.user_id}</p>
       </div>
     </div>
   );
