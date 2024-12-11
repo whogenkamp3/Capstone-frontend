@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import api from '../api'; // Ensure the base URL in api.js points to your backend server
 import './ClassCreation.css';
+import { useNavigate } from 'react-router-dom';
 
 
 const ClassCreation = () => {
@@ -8,6 +9,7 @@ const ClassCreation = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
+  const navigate = useNavigate();
 
   const handleClassSubmit = async () => {
     if (class_name.trim() === '') {
@@ -37,6 +39,9 @@ const ClassCreation = () => {
   
       setSuccessMessage(`Class "${class_name}" created successfully!`);
       setClassName(''); // Clear the input field
+
+      navigate('/home');
+
     } catch (err) {
       console.error('Error creating class:', err);
       setError(err.response?.data?.error || 'Failed to create class. Please try again.');
