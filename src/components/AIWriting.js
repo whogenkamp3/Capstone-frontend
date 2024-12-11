@@ -30,6 +30,7 @@ const AIWriting = () => {
                         value={geminiPrompt}
                         onChange={(e) => setGeminiPrompt(e.target.value)}
                         className="chat-input"
+                        style={{ width: '300px' }}
                     />
                     <button className="chat-submit" onClick={handleGeminiSubmit}>
                         Send
