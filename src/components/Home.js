@@ -110,7 +110,9 @@ const Home = () => {
                         <div className="top-row">
                             <div className="small-square" onClick={redirectToGroups}>Groups</div>
                             <div className="small-square">Upload</div>
-                            <div className="small-square">AI Writing</div>
+                            <div className="small-square">
+                              <Link to="/aiwriting">AIWriting</Link>
+                            </div>
                         </div>
                         <div className="bottom-row">
                             <div className="small-square">University</div>
