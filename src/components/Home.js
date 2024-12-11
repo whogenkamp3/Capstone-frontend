@@ -1,16 +1,57 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for navigation
+import api from '../api'; // Assuming you have an API instance to make requests
 import Header from './Header';
-import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
-
+import GeminiComponent from './GeminiComponent'; // Correct import
 
 const Home = () => {
-    const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
+    const [classes, setClasses] = useState([]); // Store class names
+    const [loading, setLoading] = useState(true); // Loading state
+    const [error, setError] = useState(null); // Error state
     const [isChatOpen, setIsChatOpen] = useState(false); // State to track chat window visibility
     const [geminiPrompt, setGeminiPrompt] = useState(''); // Store the input for the Gemini prompt
     const [submittedPrompt, setSubmittedPrompt] = useState(''); // Store the prompt to submit
 
     const navigate = useNavigate(); // Initialize useNavigate for redirection
+
+    // Fetch user classes from the API
+    const fetchClasses = async () => {
+        setLoading(true);
+        setError(null);
+
+        try {
+            const user_id = localStorage.getItem('user_id'); // Assuming user_id is stored in localStorage
+            if (!user_id) {
+                setError('User ID is missing.');
+                setLoading(false);
+                return;
+            }
+
+            const response = await api.get('/get-user-classes', {
+                params: { user_id },
+            });
+
+            // Debugging: Log the entire response to inspect its structure
+            console.log('API Response:', response);
+
+            if (Array.isArray(response.data)) {
+                console.log('Classes from API:', response.data); // Debugging the classes returned
+                setClasses(response.data); // Set classes from response
+            } else {
+                setError('No classes found.');
+            }
+        } catch (err) {
+            setError('Failed to fetch classes. Please try again.');
+            console.error('Error fetching classes:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Fetch classes when the component mounts
+    useEffect(() => {
+        fetchClasses();
+    }, []); // Empty dependency array ensures this runs only on mount
 
     // Toggle chat window visibility
     const toggleChat = () => {
@@ -31,9 +72,9 @@ const Home = () => {
         navigate('/classcreation');
     };
 
-    const handleGroupsClick = () => {
-      // Navigate to home page when the logo is clicked
-      navigate('/groups');
+    // Redirect to Groups.js when the Groups section is clicked
+    const redirectToGroups = () => {
+        navigate('/groups');
     };
 
     return (
@@ -45,23 +86,29 @@ const Home = () => {
                 <div className="container">
                     {/* Left side content with class selection */}
                     <div className="square left-square">
-                        <div className="class-text">Class</div>
+                        <div className="class-text">Classes</div>
                         <button className="plus-button" onClick={redirectToClassCreation}>+</button>
 
-                        {/* Render all selected classes */}
+                        {/* Render classes */}
                         <div className="class-squares-container">
-                            {selectedClasses.map((className, index) => (
-                                <div key={index} className="small-square">
-                                    {className}
-                                </div>
-                            ))}
+                            {loading && <p>Loading classes...</p>}
+                            {error && <p className="error">{error}</p>}
+                            {classes.length > 0 ? (
+                                classes.map((classObj) => (
+                                    <div key={classObj.class_id} className="small-square">
+                                        {classObj.class_name} ({classObj.university})
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No classes found.</p>
+                            )}
                         </div>
                     </div>
 
                     {/* Right side content with additional information */}
                     <div className="square right-square">
                         <div className="top-row">
-                            <div className="small-square" onClick={handleGroupsClick}> Groups</div>
+                            <div className="small-square" onClick={redirectToGroups}>Groups</div>
                             <div className="small-square">Upload</div>
                             <div className="small-square">AI Writing</div>
                         </div>
@@ -108,6 +155,15 @@ const Home = () => {
 };
 
 export default Home;
+
+
+
+
+
+
+
+
+
 
 
 
