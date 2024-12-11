@@ -77,6 +77,10 @@ const Home = () => {
         navigate('/groups');
     };
 
+    const redirectToaiWriting = () =>{
+      navigate('/aiWriting');
+    };
+
     return (
         <div className="home-container">
             {/* Include Header */}
@@ -110,8 +114,8 @@ const Home = () => {
                         <div className="top-row">
                             <div className="small-square" onClick={redirectToGroups}>Groups</div>
                             <div className="small-square">Upload</div>
-                            <div className="small-square">
-                              <Link to="/aiwriting">AIWriting</Link>
+                            <div className="small-square" onClick={redirectToaiWriting}>
+                              AIWriting
                             </div>
                         </div>
                         <div className="bottom-row">
