@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'; // Import useNavigate for naviga
 import Header from './Header';
 import GeminiComponent from './GeminiComponent'; // Import the Gemini component for prompt handling
 
+
 const Home = () => {
     const [selectedClasses, setSelectedClasses] = useState([]); // Store selected classes as an array
     const [isChatOpen, setIsChatOpen] = useState(false); // State to track chat window visibility
@@ -30,6 +31,11 @@ const Home = () => {
         navigate('/classcreation');
     };
 
+    const handleGroupsClick = () => {
+      // Navigate to home page when the logo is clicked
+      navigate('/groups');
+    };
+
     return (
         <div className="home-container">
             {/* Include Header */}
@@ -55,7 +61,7 @@ const Home = () => {
                     {/* Right side content with additional information */}
                     <div className="square right-square">
                         <div className="top-row">
-                            <div className="small-square">Groups</div>
+                            <div className="small-square" onClick={handleGroupsClick}> Groups</div>
                             <div className="small-square">Upload</div>
                             <div className="small-square">AI Writing</div>
                         </div>

@@ -15,11 +15,11 @@ const ClassCreation = () => {
       setSuccessMessage(null);
       return;
     }
-
+  
     setLoading(true);
     setError(null);
     setSuccessMessage(null);
-
+  
     try {
       const user_id = localStorage.getItem('user_id');
       if (!user_id) {
@@ -27,22 +27,24 @@ const ClassCreation = () => {
         setLoading(false);
         return;
       }
-      console.log(user_id,class_name);
-      // POST request to create the class
-      const response = await api.post('/create-class-and-link/', {
-        class_name: class_name, // Updated to match backend expected field
-        user_id: user_id, // Include user_id for linking the class
-      });
-
-      setSuccessMessage(`Class "${response.data.class_name}" created successfully!`);
+      console.log(user_id, class_name);
+  
+      // POST request to create the class with user_id as a query parameter
+      const response = await api.post('/create-class-and-link/', 
+        { class_name }, // Request body
+        { params: { user_id } } // Query parameters
+      );
+  
+      setSuccessMessage(`Class "${class_name}" created successfully!`);
       setClassName(''); // Clear the input field
     } catch (err) {
       console.error('Error creating class:', err);
-      setError(err.response?.data?.detail || 'Failed to create class. Please try again.');
+      setError(err.response?.data?.error || 'Failed to create class. Please try again.');
     } finally {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="class-creation-container">

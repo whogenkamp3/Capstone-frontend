@@ -1,0 +1,96 @@
+/* General container styling for the Groups page */
+.groupsPageContainer {
+    background-color: #1f3b60; /* Dark blue background */
+    color: #ffffff; /* White text */
+    max-width: 80%; /* Set to 80% of the viewport width for a wider container */
+    padding: 15px; /* Smaller padding for compact design */
+    margin: 50px auto;
+    
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    border: 3px solid #2e75b6; /* Blue square border */
+}
+
+/* Header styling */
+.groupsPageTitle {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Section headers */
+.groupsSection h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+/* Group list */
+.groupsList {
+    list-style: none;
+    padding: 0;
+    margin: 20px 0;
+}
+
+.groupsListItem {
+    background-color: #2e4d6c; 
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+
+.groupsInput {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #2e4d6c; 
+    color: white;
+    box-sizing: border-box;
+}
+
+.groupsInput:focus {
+    outline: none;
+    border: 1px solid #808080; /* Light gray border on focus */
+}
+
+/* Buttons */
+.groupsButton {
+    background-color: #bcbcbc; /* Gray background */
+    color: #000000; /* Black text */
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.groupsButton:hover {
+    background-color: #a9a9a9; /* Slightly darker gray on hover */
+}
+
+/* Message styling */
+.groupsMessage {
+    font-size: 14px;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.groupsMessageError {
+    color: #ff4d4f; /* Red for error messages */
+}
+
+.groupsMessageSuccess {
+    color: #4caf50; /* Green for success messages */
+}
+
+/* Utility for spacing */
+.groupsSection {
+    margin-bottom: 30px;
+}
+
